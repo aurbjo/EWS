@@ -24,7 +24,8 @@ function Save-EWSAttachment {
         }
 
         foreach ($singleAttachment in $Attachment) {
-            $fullPath = Join-Path -Path $Path -ChildPath $singleAttachment.Name
+            $Name = $singleAttachment.Name -replace '[\\\/\:\*\?\"\|\[\]\<\>]', ''
+            $fullPath = Join-Path -Path $Path -ChildPath $Name
             if ($PSCmdlet.ShouldProcess(
                     $singleAttachment.Name,
                     "Save to $Path"
